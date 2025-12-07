@@ -40,6 +40,7 @@ li {
   list-style: none;
   transition: ease-in-out 0.2s;
   font-weight: bolder;
+  text-transform: uppercase;
 }
 
 li:hover {

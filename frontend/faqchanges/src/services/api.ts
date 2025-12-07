@@ -88,7 +88,7 @@ export async function getFaqs() {
 // polls the latest changes and updates the data (even if there are no changes)
 export const PollFaqs = async () => {
   try {
-    const response = await fetch(`http://localhost:3000/api/changes?limit=10`);
+    const response = await fetch(`http://localhost:3000/api/changes?limit=20`);
     console.log('Polling for new data');
     if (!response.ok) {
       throw new Error('Fetching Failed');
@@ -109,7 +109,7 @@ export const PollFaqs = async () => {
 
 export async function getFaqPerProp(id: number): Promise<SingleFaq[] | undefined> {
   try {
-    const response = await fetch(`http://localhost:3000/api/changes?website_id=${id}&limit=10`);
+    const response = await fetch(`http://localhost:3000/api/changes?website_id=${id}&limit=20`);
     if (!response.ok) {
       throw new Error('Fetching failed');
     }

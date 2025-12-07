@@ -1,7 +1,8 @@
 import { ref, type Ref } from 'vue';
-import { getSpecificPropFaq, PollFaqs, allPropFaq, getAllData } from './api';
+import { getSpecificPropFaq, PollFaqs, allPropFaq, getAllData, type SingleFaq } from './api';
 
 export const newArray: Ref<{ id: number; name: string }[]> = ref([]);
+export const dataSet: Ref<SingleFaq[]> = ref([]);
 
 // polling every 2 hours
 
@@ -43,4 +44,13 @@ export async function filterWebsite() {
       newArray.value.push({ id: e.id, name: e.name });
     }
   });
+}
+
+export async function filterChanges(sortBy: string) {
+  if (sortBy === 'all') {
+    return (allPropFaq.value = dataSet.value);
+  }
+  if (dataSet.value) {
+    allPropFaq.value = dataSet.value.filter((e) => e.change_type === sortBy);
+  }
 }

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { allPropFaq, getFaqPerProp } from '@/services/api';
-import { addColor, addSymbol, getPropFaq } from '@/services/faq';
+import { addColor, addSymbol, dataSet, getPropFaq } from '@/services/faq';
 import { onMounted, watch } from 'vue';
 
 const props = defineProps<{
@@ -17,7 +17,10 @@ watch(
 const fetchData = async () => {
   if (props.websiteId) {
     const data = await getFaqPerProp(props.websiteId);
-    if (data) allPropFaq.value = data;
+    if (data) {
+      allPropFaq.value = data;
+      dataSet.value = data;
+    }
   } else {
     getPropFaq();
   }
@@ -31,6 +34,12 @@ onMounted(() => {
 <template>
   <!-- <button @click="PollFaqs">Get new data</button> -->
   <!-- <button @click="createTestChange">Create changes</button> -->
+  <div v-if="allPropFaq.length === 0" class="no-changes">
+    <v-card class="no-changes-card">
+      <v-card-title>No Recent Changes Found</v-card-title>
+      <v-card-text>There are no recent changes for this firm in this category.</v-card-text>
+    </v-card>
+  </div>
   <li v-for="(item, index) in allPropFaq" :key="index">
     <v-col cols="12" md="6">
       <v-card
@@ -49,6 +58,26 @@ onMounted(() => {
 </template>
 
 <style scoped>
+li {
+  list-style: none;
+}
+
+.no-changes {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.no-changes-card {
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  padding: 2rem;
+  max-width: 400px;
+}
+
 .info {
   background: linear-gradient(
     90deg,
