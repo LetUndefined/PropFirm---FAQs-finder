@@ -40,21 +40,23 @@ onMounted(() => {
       <v-card-text>There are no recent changes for this firm in this category.</v-card-text>
     </v-card>
   </div>
-  <li v-for="(item, index) in allPropFaq" :key="index">
-    <v-col cols="12" md="6">
-      <v-card
-        :class="addColor(item.change_type)"
-        :prepend-icon="addSymbol(item.change_type)"
-        :subtitle="`${item.detected_at}`"
-        :title="`${item.website_name} ${item.change_type} FAQ's`"
-      >
-        <v-card-text
-          >{{ item.question }}<br />
-          <a :href="item.article_url" target="_blank">Visit FAQ</a>
-        </v-card-text>
-      </v-card>
-    </v-col>
-  </li>
+  <ul>
+    <li v-for="(item, index) in allPropFaq" :key="index">
+      <v-col cols="12" md="6">
+        <v-card
+          :class="addColor(item.change_type)"
+          :prepend-icon="addSymbol(item.change_type)"
+          :subtitle="`${item.detected_at}`"
+          :title="`${item.website_name} ${item.change_type} FAQ's`"
+        >
+          <v-card-text
+            >{{ item.question }}<br />
+            <a :href="item.article_url" target="_blank">Visit FAQ</a>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </li>
+  </ul>
 </template>
 
 <style scoped>
