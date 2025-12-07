@@ -1,5 +1,5 @@
 import { ref, type Ref } from 'vue';
-import { getSpecificPropFaq, PollFaqs, allPropFaq } from './api';
+import { getSpecificPropFaq, PollFaqs, allPropFaq, getAllData } from './api';
 
 export const newArray: Ref<{ id: number; name: string }[]> = ref([]);
 
@@ -37,10 +37,10 @@ export const addSymbol = (changeType: string) => {
 };
 
 export async function filterWebsite() {
-  const response = await getSpecificPropFaq();
+  const response = await getAllData();
   response?.forEach((e) => {
-    if (!newArray.value.find((item) => item.id === e.website_id)) {
-      newArray.value.push({ id: e.website_id, name: e.website_name });
+    if (!newArray.value.find((item) => item.id === e.id)) {
+      newArray.value.push({ id: e.id, name: e.name });
     }
   });
 }

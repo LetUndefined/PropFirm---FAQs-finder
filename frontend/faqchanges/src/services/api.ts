@@ -67,11 +67,12 @@ export async function getAllFaqs(): Promise<FAQs[] | undefined> {
 // Get all changes
 export async function getSpecificPropFaq(): Promise<SingleFaq[] | undefined> {
   try {
-    const response = await fetch(`http://localhost:3000/api/changes?limit=10`);
+    const response = await fetch(`http://localhost:3000/api/changes?limit=20`);
     if (!response.ok) {
       throw new Error('Failed to fetch API');
     }
     const data: SingleFaq[] = await response.json();
+    data.forEach((e) => console.log(` Data for ${e.website_name} fetched  `));
 
     return data;
   } catch (error) {
